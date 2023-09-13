@@ -3,7 +3,7 @@ import {Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Rating from './Rating';
 
-import products from '../products';
+// import products from '../products';
 
 const Product = ({ product }) => {
   return (
