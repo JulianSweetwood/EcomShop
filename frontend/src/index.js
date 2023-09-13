@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/styles/bootstrap.custom.css';
-import './assets/styles/index.css';
+import {createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom';
+import './assets/styles/index.css'
 import App from './App';
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
+
+import HomeScreen from './Screens/Homescreen';
+import ProductScreen from './Screens/ProductScreen';
+
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route  path='/' element={<App/>}>
@@ -15,10 +17,13 @@ const router = createBrowserRouter(createRoutesFromElements(
   </Route>
 ))
 
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+   <RouterProvider router={router}/>
   </React.StrictMode>
 );
 
+ 

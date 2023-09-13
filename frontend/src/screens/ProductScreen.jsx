@@ -10,7 +10,7 @@ import {
   Button,
   ListGroupItem,
 } from "react-bootstrap";
-import Rating from "../components/Rating";
+import Rating from "../Components/Rating";
 import products from "../products";
 
 const ProductScreen = () => {
