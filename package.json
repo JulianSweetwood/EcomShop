@@ -1,0 +1,15 @@
+{
+  "name": "ecomshop",
+  "version": "1.0.0",
+  "description": "Ecom app built with MERN",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Julian Sussholz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
