@@ -6,8 +6,8 @@ import {createBrowserRouter, createRoutesFromElements, RouterProvider, Route } f
 import './assets/styles/index.css'
 import App from './App';
 
-import HomeScreen from './Screens/Homescreen';
-import ProductScreen from './Screens/ProductScreen';
+import HomeScreen from './Screens/HomeScreen.jsx';
+import ProductScreen from './Screens/ProductScreen.jsx';
 
 
 const router = createBrowserRouter(createRoutesFromElements(
