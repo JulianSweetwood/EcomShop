@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useGetProductDetailsQuery } from "../slices/productApiSlice";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
@@ -12,29 +12,25 @@ import {
   ListGroupItem,
 } from "react-bootstrap";
 import Rating from "../Components/Rating";
-import axios from 'axios';
+
 
 const ProductScreen = () => {
-  const [product, setProduct] = useState({});
-
   const { id: productId } = useParams();
 
-  useEffect (()=> {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(`/api/products/${productId}`);
-      setProduct(data);
-    }
-    fetchProduct();
-  },[productId]);
-
-
+  const { data: product, isLoading, error } = useGetProductDetailsQuery(productId);
 
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
-      <Row>
+
+      { isLoading ? (
+        <h2>...Loading</h2>
+      ) : error ? (
+        <div>{error?.data?.message || error.error}</div>
+      ) : (
+        <Row>
         <Col md={5}>
           <Image src={product.image} alt={product.name} fluid />
         </Col>
@@ -84,6 +80,8 @@ const ProductScreen = () => {
           </Card>
         </Col>
       </Row>
+      ) }
+      
     </>
   );
 };
