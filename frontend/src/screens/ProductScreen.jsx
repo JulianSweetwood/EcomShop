@@ -2,6 +2,8 @@ import React from "react";
 import { useGetProductDetailsQuery } from "../slices/productApiSlice";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Loader from "../Components/Loader";
+import Message from "../Components/Message"
 import {
   Row,
   Col,
@@ -24,11 +26,12 @@ const ProductScreen = () => {
       <Link className="btn btn-light my-3" to="/">
         Go Back
       </Link>
+      
 
       { isLoading ? (
-        <h2>...Loading</h2>
+        <Loader/>
       ) : error ? (
-        <div>{error?.data?.message || error.error}</div>
+        <Message variant='danger'> {error?.data?.message ||  error.error } </Message>
       ) : (
         <Row>
         <Col md={5}>
