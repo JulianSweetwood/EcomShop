@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, ListGroup, Image, Form, Button, Card, FormControl, ListGroupItem} from 'react-bootstrap';
 import { FaTrash } from 'react-icons/fa';
 import Message from '../Components/Message.jsx';
-import { addToCart } from '../slices/cartSlice';
+import { addToCart, removeFromCart } from '../slices/cartSlice';
 
 const CartScreen = () => {
 const navigate = useNavigate();
@@ -15,6 +15,9 @@ const { cartItems } = cart;
 
 const addToCartHandler = async (product, qty) => {
 dispatch(addToCart({...product, qty}));
+};
+const removeFromCartHandler = async (id) => {
+dispatch(removeFromCart(id));
 };
 
   return (
@@ -52,7 +55,7 @@ dispatch(addToCart({...product, qty}));
                     </FormControl>
                             </Col>
                             <Col md={2}>
-                                <Button type='button' variant='light'>
+                                <Button type='button' variant='light' onClick={() => removeFromCartHandler(item._id)}>
                                     <FaTrash/>
                                 </Button>
                             </Col>

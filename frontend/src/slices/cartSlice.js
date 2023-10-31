@@ -20,11 +20,16 @@ const initialState = localStorage.getItem("cart") ? JSON.parse(localStorage.getI
             state.cartItems = [...state.cartItems, item]
          }
 
+         return updateCart(state);
+      },
+      removeFromCart: (state, action ) => { 
+         state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
+
          return updateCart(state)
-      }
+      } 
     },
  });
 
-export const {addToCart} = cartSlice.actions;
+export const {addToCart, removeFromCart} = cartSlice.actions;
 
  export default cartSlice.reducer;
