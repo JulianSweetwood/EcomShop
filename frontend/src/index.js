@@ -12,6 +12,7 @@ import {
 import "./assets/styles/index.css";
 import App from "./App";
 import PrivateRoute from "./Components/PrivateRoute.jsx";
+import PaymentScreen from "./Screens/PaymentScreen.jsx";
 import LoginScreen from "./Screens/LoginScreen.jsx";
 import RegisterScreen from "./Screens/RegisterScreen.jsx";
 import HomeScreen from "./Screens/HomeScreen.jsx";
@@ -30,7 +31,7 @@ const router = createBrowserRouter(
 
       <Route path="" element={<PrivateRoute />}>
       <Route path="/shipping" element={<ShippingScreen />} />
-        
+      <Route path="/payment" element={<PaymentScreen/>}/>
       </Route>
     
     </Route>
