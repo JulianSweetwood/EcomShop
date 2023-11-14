@@ -1,56 +1,96 @@
 import asyncHandler from "../middleware/asyncHandler.js";
-import Order from '../models/orderModel.js'
- 
+import Order from "../models/orderModel.js";
+
 //@desc Create New Order
 //@route POST/api/orders
 //@Access Private
 const addOrderItems = asyncHandler(async (req, res) => {
-res.send('add order items');
-});
+  const {
+    orderItems,
+    shippingAdress,
+    paymentMethod,
+    itemsPrice,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+  } = req.body;
 
+  if (orderItems && orderItems.length === 0) {
+    res.status(400);
+    throw new Error("No order items");
+  } else {
+    const order = new order({
+      orderItems: orderItems.map((x) => ({
+        ...x,
+        product: x._id,
+        _id: undefined,
+      })),
+      user: req.user._id,
+      shippingAdress,
+      paymentMethod,
+      itemsPrice,
+      taxPrice,
+      shippingPrice,
+      totalPrice,
+    });
+
+    const createdOrder = await order.save();
+
+    res.status(201).json(createdOrder);
+  }
+});
 
 //@desc Get Logged in Users Orders
 //@route GET/api/orders/myorders
 //@Access Private
-const getMyOrders= asyncHandler(async (req, res) => {
-    res.send('get my orders');
-    });
+const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({ user: req.user._id });
+  res.status(200).json(orders);
+});
 
-    //@desc Get order by ID
+//@desc Get order by ID
 //@route GET/api/orders/:id
 //@Access Private
 const getOrderById = asyncHandler(async (req, res) => {
-    res.send('get order by ID');
-    });
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
 
-    //@desc Update order to paid
+  if(order) {
+    res.status(200).json(order)
+  } else {
+    res.status(404);
+    throw new Error('Order not found')
+  }
+});
+
+//@desc Update order to paid
 //@route GET/api/orders/:id/pay
 //@Access Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-    res.send('update order to paid');
-    });
+  res.send("update order to paid");
+});
 
-    //@desc Update to delivered
+//@desc Update to delivered
 //@route GET/api/orders/delivered
 //@Access Private/Admin
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
-    res.send('Update Order To Delivered');
-    });
+  res.send("Update Order To Delivered");
+});
 
-
-    //@desc Get All Orders
+//@desc Get All Orders
 //@route POST/api/orders
 //@Access Private/Admin
 const getOrders = asyncHandler(async (req, res) => {
-    res.send('Get All Orders');
-    });
+  res.send("Get All Orders");
+});
 
-
-    export {
-        addOrderItems,
-        getMyOrders,
-        getOrderById,
-        updateOrderToPaid,
-        updateOrderToDelivered,
-        getOrders
-    }
+export {
+  addOrderItems,
+  getMyOrders,
+  getOrderById,
+  updateOrderToPaid,
+  updateOrderToDelivered,
+  getOrders,
+};
