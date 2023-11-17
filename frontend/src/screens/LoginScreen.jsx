@@ -49,7 +49,7 @@ const submitHandler = async (e) => {
 
         <Form onSubmit={submitHandler}>
             <Form.Group controlId='email' className='my-3'>
-            <Form.Label>Email Adress</Form.Label>
+            <Form.Label>Email Address</Form.Label>
             <Form.Control 
             type="email" 
             placeholder='Enter Email'
