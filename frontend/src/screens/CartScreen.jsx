@@ -83,6 +83,12 @@ const checkoutHandler = () => {
                         onClick={ checkoutHandler }>
                             Proceed To Checkout 
                         </Button>
+                        </ListGroupItem>
+
+                        <ListGroupItem>
+                        <Message>
+                        Continue shopping? <Link to="/">Go back</Link>
+                        </Message>
                     </ListGroupItem>
                 </ListGroup>
             </Card>
